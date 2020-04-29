@@ -21,10 +21,11 @@ class QA(ABC):
     """
 
     def __init__(self, bert_squad_model='bert-large-uncased-whole-word-masking-finetuned-squad',
-                 bert_emb_model='bert-base-uncased'):
+                 bert_emb_model='bert-base-uncased', pt_value=False):
         self.model_name = bert_squad_model
-        self.model = TFBertForQuestionAnswering.from_pretrained(self.model_name)
-        self.tokenizer = BertTokenizer.from_pretrained(self.model_name)
+        self.pt_val = pt_value
+        self.model = TFBertForQuestionAnswering.from_pretrained(self.model_name, from_pt=self.pt_val)
+        self.tokenizer = BertTokenizer.from_pretrained(self.model_name, from_pt=self.pt_val)
         self.maxlen = 512
         self.te = tpp.TransformerEmbedding(bert_emb_model, layers=[-2])
 
