@@ -113,7 +113,7 @@ class SimpleQA(QA):
     """
     def __init__(self, index_dir, 
                  bert_squad_model='bert-large-uncased-whole-word-masking-finetuned-squad',
-                 bert_emb_model='bert-base-uncased'):
+                 bert_emb_model='bert-base-uncased', from_pytorch=False):
         """
         SimpleQA constructor
         Args:
@@ -128,7 +128,7 @@ class SimpleQA(QA):
             ix = index.open_dir(self.index_dir)
         except:
             raise ValueError('index_dir has not yet been created - please call SimpleQA.initialize_index("%s")' % (self.index_dir))
-        super().__init__(bert_squad_model=bert_squad_model, bert_emb_model=bert_emb_model)
+        super().__init__(bert_squad_model=bert_squad_model, bert_emb_model=bert_emb_model, pt_value=from_pytorch)
 
 
     def _open_ix(self):
